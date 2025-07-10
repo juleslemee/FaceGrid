@@ -90,8 +90,8 @@ const Index = () => {
               <p className="text-gray-600 text-center mt-2">Choose your grid size and create stunning face collections</p>
             </CardHeader>
             <CardContent className="space-y-8">
-              <div className="flex flex-col sm:flex-row gap-6 items-end">
-                <div className="flex-1">
+              <div className="flex flex-col gap-6 items-end">
+                <div className="w-full sm:flex-1">
                   <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Grid Size
                   </label>
@@ -113,7 +113,7 @@ const Index = () => {
                   onClick={handleGenerate}
                   disabled={isGenerating}
                   size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-10 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 disabled:transform-none"
+                  className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-10 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 disabled:transform-none"
                 >
                   {isGenerating ? (
                     <>
@@ -147,7 +147,7 @@ const Index = () => {
                     onClick={handleDownload}
                     variant="outline"
                     size="lg"
-                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                    className="w-full sm:w-auto border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                   >
                     <Download className="w-5 h-5 mr-3" />
                     Download High-Quality PNG
