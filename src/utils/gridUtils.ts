@@ -5,28 +5,33 @@ export const generateFaceGrid = async (
   totalFaces: number,
   onProgress: (loadedCount: number) => void
 ): Promise<string[]> => {
-  const faces: string[] = [];
-  const loadPromises: Promise<string>[] = [];
-
-  for (let i = 0; i < totalFaces; i++) {
-    const promise = fetchFaceImage().then(imageUrl => {
-      faces.push(imageUrl);
-      onProgress(faces.length);
-      return imageUrl;
-    });
+  try {
+    // Call our API to generate faces
+    const response = await fetch(`/api/generate-faces?count=${totalFaces}`);
     
-    loadPromises.push(promise);
-    
-    // Add small delay between requests to avoid overwhelming the API
-    if (i % 5 === 0 && i > 0) {
-      await new Promise(resolve => setTimeout(resolve, 100));
+    if (!response.ok) {
+      throw new Error(`API error! status: ${response.status}`);
     }
+    
+    const data = await response.json();
+    
+    if (!data.success) {
+      throw new Error(data.error || 'Failed to generate faces');
+    }
+    
+    // Filter out any null faces and report progress
+    const validFaces = data.faces.filter((face: string) => face !== null);
+    onProgress(validFaces.length);
+    
+    return validFaces;
+    
+  } catch (error) {
+    console.error('Failed to generate face grid:', error);
+    throw error;
   }
-
-  await Promise.all(loadPromises);
-  return faces;
 };
 
+// Keep the old function as fallback
 const fetchFaceImage = async (): Promise<string> => {
   try {
     // Add random parameter to bypass cache

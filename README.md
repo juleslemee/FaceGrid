@@ -1,73 +1,47 @@
-# Welcome to your Lovable project
+# FaceGrid AI Gallery
 
-## Project info
+Generate professional grids of AI-generated faces perfect for mockups, presentations, and design projects.
 
-**URL**: https://lovable.dev/projects/544d3f7a-a0ba-472c-9413-053f086a80b0
+## Features
 
-## How can I edit this code?
+- Generate grids from 3x3 to 15x10 (up to 150 faces)
+- Real-time progress tracking
+- High-quality PNG downloads
+- Responsive design
+- No registration required
 
-There are several ways of editing your application.
+## Quick Start
 
-**Use Lovable**
+```bash
+# Install dependencies
+npm install
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/544d3f7a-a0ba-472c-9413-053f086a80b0) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
-**Edit a file directly in GitHub**
+## Tech Stack
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- **Frontend**: React + TypeScript + Vite
+- **UI**: Tailwind CSS + shadcn/ui
+- **Backend**: Python Vercel Functions
+- **Face Generation**: ThisPersonDoesNotExist.com API
+- **Image Processing**: html2canvas for downloads
 
-**Use GitHub Codespaces**
+## Usage
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. Select your desired grid size
+2. Click "Generate Grid" 
+3. Wait for faces to load
+4. Download your high-quality PNG
 
-## What technologies are used for this project?
+## API
 
-This project is built with:
+The app uses a Python backend API that fetches faces from `https://thispersondoesnotexist.com/` and returns them to the frontend for grid composition.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## License
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/544d3f7a-a0ba-472c-9413-053f086a80b0) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+MIT License - Feel free to use in your projects!
