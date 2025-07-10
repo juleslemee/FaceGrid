@@ -4,7 +4,7 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Progress } from '@/components/ui/progress';
-import { Download, Users } from 'lucide-react';
+import { Download, Users, Sparkles } from 'lucide-react';
 import FaceGrid from '@/components/FaceGrid';
 import { generateFaceGrid, downloadGrid } from '@/utils/gridUtils';
 
@@ -60,89 +60,114 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Users className="w-8 h-8 text-blue-600" />
-            <h1 className="text-4xl font-bold text-gray-900">PeopleGrid</h1>
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="relative">
+              <Users className="w-10 h-10 text-blue-600" />
+              <Sparkles className="w-4 h-4 text-yellow-500 absolute -top-1 -right-1 animate-pulse" />
+            </div>
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-blue-600 bg-clip-text text-transparent">
+              PeopleGrid
+            </h1>
           </div>
-          <p className="text-xl text-gray-600">
+          <p className="text-2xl text-gray-700 font-medium mb-3">
             AI Face Grid Generator
           </p>
-          <p className="text-gray-500 mt-2">
-            Generate grids of AI faces for mockups and presentations
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+            Generate professional grids of AI faces perfect for mockups, presentations, and design projects
           </p>
         </div>
 
         {/* Controls Card */}
-        <Card className="mb-8 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-          <CardHeader>
-            <h2 className="text-2xl font-semibold text-gray-800">Generate Your Grid</h2>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex flex-col sm:flex-row gap-4 items-end">
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Grid Size
-                </label>
-                <Select value={selectedSize} onValueChange={setSelectedSize}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select grid size" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {gridSizes.map((size) => (
-                      <SelectItem key={size.value} value={size.value}>
-                        {size.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <Button
-                onClick={handleGenerate}
-                disabled={isGenerating}
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg font-medium"
-              >
-                {isGenerating ? 'Generating...' : 'Generate Grid'}
-              </Button>
-            </div>
-
-            {/* Progress Bar */}
-            {isGenerating && (
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm text-gray-600">
-                  <span>Generating faces...</span>
-                  <span>{Math.round(progress)}%</span>
+        <Card className="mb-12 shadow-2xl border-0 bg-white/90 backdrop-blur-sm overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-indigo-50/50" />
+          <div className="relative">
+            <CardHeader className="pb-6">
+              <h2 className="text-3xl font-bold text-gray-800 text-center">Generate Your Grid</h2>
+              <p className="text-gray-600 text-center mt-2">Choose your grid size and create stunning face collections</p>
+            </CardHeader>
+            <CardContent className="space-y-8">
+              <div className="flex flex-col sm:flex-row gap-6 items-end">
+                <div className="flex-1">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    Grid Size
+                  </label>
+                  <Select value={selectedSize} onValueChange={setSelectedSize}>
+                    <SelectTrigger className="w-full h-12 text-lg border-2 border-gray-200 hover:border-blue-300 transition-colors">
+                      <SelectValue placeholder="Select grid size" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {gridSizes.map((size) => (
+                        <SelectItem key={size.value} value={size.value} className="text-lg py-3">
+                          {size.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
-                <Progress value={progress} className="w-full" />
-              </div>
-            )}
-
-            {/* Download Button */}
-            {isComplete && faces.length > 0 && (
-              <div className="flex justify-center">
+                
                 <Button
-                  onClick={handleDownload}
-                  variant="outline"
+                  onClick={handleGenerate}
+                  disabled={isGenerating}
                   size="lg"
-                  className="border-blue-600 text-blue-600 hover:bg-blue-50"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-10 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 disabled:transform-none"
                 >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download PNG
+                  {isGenerating ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+                      Generating...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-5 h-5 mr-2" />
+                      Generate Grid
+                    </>
+                  )}
                 </Button>
               </div>
-            )}
-          </CardContent>
+
+              {/* Progress Bar */}
+              {isGenerating && (
+                <div className="space-y-3 animate-fade-in">
+                  <div className="flex justify-between text-sm font-medium text-gray-700">
+                    <span>Generating {totalFaces} unique faces...</span>
+                    <span>{Math.round(progress)}%</span>
+                  </div>
+                  <Progress value={progress} className="w-full h-3" />
+                </div>
+              )}
+
+              {/* Download Button */}
+              {isComplete && faces.length > 0 && (
+                <div className="flex justify-center animate-fade-in">
+                  <Button
+                    onClick={handleDownload}
+                    variant="outline"
+                    size="lg"
+                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                  >
+                    <Download className="w-5 h-5 mr-3" />
+                    Download High-Quality PNG
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </div>
         </Card>
 
         {/* Grid Display */}
         {faces.length > 0 && (
-          <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-6">
+          <Card className="shadow-2xl border-0 bg-white/90 backdrop-blur-sm animate-fade-in">
+            <CardContent className="p-8">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">Your Generated Grid</h3>
+                <p className="text-gray-600">
+                  {isGenerating ? `Loading ${faces.length} of ${totalFaces} faces...` : `${totalFaces} unique AI-generated faces`}
+                </p>
+              </div>
               <FaceGrid
                 ref={gridRef}
                 faces={faces}
@@ -155,9 +180,16 @@ const Index = () => {
         )}
 
         {/* Footer */}
-        <div className="text-center mt-12 text-gray-500">
-          <p className="text-sm">
-            Powered by AI • All faces are artificially generated
+        <div className="text-center mt-16 text-gray-500">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Sparkles className="w-4 h-4" />
+            <p className="text-sm font-medium">
+              Powered by Advanced AI Technology
+            </p>
+            <Sparkles className="w-4 h-4" />
+          </div>
+          <p className="text-xs">
+            All faces are artificially generated and do not represent real people
           </p>
         </div>
       </div>

@@ -17,11 +17,11 @@ const FaceGrid = forwardRef<HTMLDivElement, FaceGridProps>(
     return (
       <div 
         ref={ref}
-        className="w-full max-w-4xl mx-auto"
+        className="w-full max-w-5xl mx-auto"
         style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${cols}, 1fr)`,
-          gap: '4px',
+          gap: '6px',
           aspectRatio: `${cols}/${rows}`,
         }}
       >
@@ -29,21 +29,22 @@ const FaceGrid = forwardRef<HTMLDivElement, FaceGridProps>(
         {faces.map((face, index) => (
           <div
             key={index}
-            className="aspect-square overflow-hidden rounded-sm bg-gray-100 relative group"
+            className="aspect-square overflow-hidden rounded-lg bg-gray-100 relative group shadow-sm hover:shadow-lg transition-all duration-300"
           >
             <img
               src={face}
               alt={`AI generated face ${index + 1}`}
-              className="w-full h-full object-cover transition-transform group-hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110"
               loading="lazy"
             />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
           </div>
         ))}
         
         {/* Render placeholder skeletons for remaining cells */}
         {isGenerating && Array.from({ length: emptyCells }).map((_, index) => (
           <div key={`skeleton-${index}`} className="aspect-square">
-            <Skeleton className="w-full h-full rounded-sm" />
+            <Skeleton className="w-full h-full rounded-lg animate-pulse" />
           </div>
         ))}
       </div>
