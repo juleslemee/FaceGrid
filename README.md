@@ -8,7 +8,7 @@
 
 Generate professional grids of AI-generated faces perfect for mockups, presentations, and design projects.
 
-![Example Output](public/example_output.png)
+![Example Output](public/example_output.jpg)
 
 ## ✨ Features
 
