@@ -70,7 +70,7 @@ const Index = () => {
               <Sparkles className="w-4 h-4 text-yellow-500 absolute -top-1 -right-1 animate-pulse" />
             </div>
             <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-blue-600 bg-clip-text text-transparent">
-              PeopleGrid
+              FaceGrid
             </h1>
           </div>
           <p className="text-2xl text-gray-700 font-medium mb-3">

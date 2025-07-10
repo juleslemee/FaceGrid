@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+<!-- Users icon -->
+<g stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21.33 28v-2.67a5.33 5.33 0 0 0-5.33-5.33H8a5.33 5.33 0 0 0-5.33 5.33V28"></path>
+<circle cx="12" cy="9.33" r="5.33"></circle>
+<path d="M29.33 28v-2.67a5.33 5.33 0 0 0-4-5.16"></path>
+<path d="M21.33 4.17a5.33 5.33 0 0 1 0 10.33"></path>
+</g>
+<!-- Small sparkles icon positioned at top-right -->
+<g stroke="#eab308" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="#eab308" transform="translate(24, 3) scale(0.4)">
+<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+<path d="M20 3v4"></path>
+<path d="M22 5h-4"></path>
+<path d="M4 17v2"></path>
+<path d="M5 18H3"></path>
+</g>
+</svg>
