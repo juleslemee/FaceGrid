@@ -32,14 +32,19 @@ const Index = () => {
   const totalFaces = selectedGrid.rows * selectedGrid.cols;
 
   const handleGenerate = async () => {
-    setIsGenerating(true);
+    // Clear everything first to avoid showing old grid
     setIsComplete(false);
-    setProgress(0);
     setFaces([]);
+    setProgress(0);
+    
+    // Small delay to ensure UI updates
+    await new Promise(resolve => setTimeout(resolve, 50));
+    
+    setIsGenerating(true);
 
-    // Estimate time based on grid size (roughly 0.5s per face)
-    const estimatedTime = totalFaces * 750; // milliseconds
-    const incrementInterval = estimatedTime / 95; // Stop at 95% until actual completion
+    // Estimate time based on grid size (roughly 1s per face)
+    const estimatedTime = totalFaces * 1000; // milliseconds
+    const incrementInterval = estimatedTime / 99; // Stop at 99% until actual completion
     
     // Start fake progress animation
     const progressInterval = setInterval(() => {
