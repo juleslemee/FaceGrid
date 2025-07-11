@@ -43,7 +43,7 @@ const Index = () => {
     setIsGenerating(true);
 
     // Estimate time based on grid size (roughly 1s per face)
-    const estimatedTime = totalFaces * 1000; // milliseconds
+    const estimatedTime = totalFaces * 1150; // milliseconds
     const incrementInterval = estimatedTime / 99; // Stop at 99% until actual completion
     
     // Start fake progress animation
