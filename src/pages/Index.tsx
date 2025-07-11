@@ -38,7 +38,7 @@ const Index = () => {
     setFaces([]);
 
     // Estimate time based on grid size (roughly 0.5s per face)
-    const estimatedTime = totalFaces * 500; // milliseconds
+    const estimatedTime = totalFaces * 750; // milliseconds
     const incrementInterval = estimatedTime / 95; // Stop at 95% until actual completion
     
     // Start fake progress animation
@@ -176,7 +176,7 @@ const Index = () => {
                     className="w-full sm:w-auto border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                   >
                     <Download className="w-5 h-5 mr-3" />
-                    Download High-Quality JPG
+                    Download Image
                   </Button>
                   <Button
                     onClick={handleDownloadNoBorders}
@@ -243,12 +243,12 @@ const Index = () => {
           <div className="flex items-center justify-center gap-2 mb-2">
             <Sparkles className="w-4 h-4" />
             <p className="text-sm font-medium">
-              Powered by Advanced AI Technology
+            All faces are artificially generated and do not represent real people
             </p>
             <Sparkles className="w-4 h-4" />
           </div>
           <p className="text-xs">
-            All faces are artificially generated and do not represent real people
+            Made with 💙 by Jules Lemée
           </p>
         </div>
       </div>
