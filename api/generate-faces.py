@@ -3,6 +3,8 @@ import json
 import requests
 import base64
 import urllib.parse
+from PIL import Image
+import io
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -27,8 +29,19 @@ class Handler(BaseHTTPRequestHandler):
                 )
                 
                 if response.status_code == 200:
+                    # Resize image to optimize file size and performance
+                    img = Image.open(io.BytesIO(response.content))
+                    
+                    # Resize to 256x256 for better performance (down from 1024x1024)
+                    img = img.resize((256, 256), Image.Resampling.LANCZOS)
+                    
+                    # Convert back to bytes with optimized quality
+                    buffer = io.BytesIO()
+                    img.save(buffer, format='JPEG', quality=85, optimize=True)
+                    buffer.seek(0)
+                    
                     # Convert to base64
-                    image_base64 = base64.b64encode(response.content).decode('utf-8')
+                    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
                     faces.append(f'data:image/jpeg;base64,{image_base64}')
                 else:
                     faces.append(None)

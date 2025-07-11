@@ -56,15 +56,21 @@ const fetchFaceImage = async (): Promise<string> => {
 export const downloadGrid = (gridElement: HTMLElement, filename: string) => {
   // Use html2canvas to convert the grid to an image
   import('html2canvas').then(html2canvas => {
+    // Calculate optimal scale to cap at 1440p width (2560x1440)
+    const gridWidth = gridElement.offsetWidth;
+    const maxWidth = 2560;
+    const scale = Math.min(2, maxWidth / gridWidth);
+    
     html2canvas.default(gridElement, {
       backgroundColor: '#ffffff',
-      scale: 2, // Higher resolution
+      scale: scale,
       useCORS: true,
       allowTaint: true,
     }).then(canvas => {
+      // Convert to JPEG with compression to reduce file size
       const link = document.createElement('a');
-      link.download = filename;
-      link.href = canvas.toDataURL('image/png');
+      link.download = filename.replace('.png', '.jpg');
+      link.href = canvas.toDataURL('image/jpeg', 0.9); // 90% quality JPEG
       link.click();
     }).catch(error => {
       console.error('Failed to generate image:', error);
