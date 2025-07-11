@@ -35,12 +35,28 @@ const Index = () => {
     setProgress(0);
     setFaces([]);
 
+    // Estimate time based on grid size (roughly 0.5s per face)
+    const estimatedTime = totalFaces * 500; // milliseconds
+    const incrementInterval = estimatedTime / 95; // Stop at 95% until actual completion
+    
+    // Start fake progress animation
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 95) {
+          clearInterval(progressInterval);
+          return 95;
+        }
+        return prev + 1;
+      });
+    }, incrementInterval);
+
     try {
       const generatedFaces = await generateFaceGrid(
         totalFaces,
         (loadedCount) => {
-          setProgress((loadedCount / totalFaces) * 100);
-          setFaces(prev => [...prev.slice(0, loadedCount - 1), ...Array(1).fill('').map(() => URL.createObjectURL(new Blob()))]);
+          // This will jump to 100% when done
+          clearInterval(progressInterval);
+          setProgress(100);
         }
       );
       
@@ -48,6 +64,8 @@ const Index = () => {
       setIsComplete(true);
     } catch (error) {
       console.error('Failed to generate faces:', error);
+      clearInterval(progressInterval);
+      setProgress(0);
     } finally {
       setIsGenerating(false);
     }

@@ -5,6 +5,8 @@ import base64
 import urllib.parse
 from PIL import Image
 import io
+import concurrent.futures
+import time
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -17,34 +19,49 @@ class Handler(BaseHTTPRequestHandler):
             count = int(params.get('count', ['1'])[0])
             count = min(count, 150)  # Limit to 150 faces max
             
-            faces = []
+            def fetch_and_process_face(index):
+                try:
+                    # Add small delay to avoid rate limiting
+                    time.sleep(index * 0.1)
+                    
+                    # Get face from thispersondoesnotexist.com
+                    response = requests.get(
+                        "https://thispersondoesnotexist.com", 
+                        headers={'User-Agent': 'FaceGrid 1.0'},
+                        timeout=10
+                    )
+                    
+                    if response.status_code == 200:
+                        # Resize image to optimize file size and performance
+                        img = Image.open(io.BytesIO(response.content))
+                        
+                        # Resize to 256x256 for better performance (down from 1024x1024)
+                        img = img.resize((256, 256), Image.Resampling.LANCZOS)
+                        
+                        # Convert back to bytes with optimized quality
+                        buffer = io.BytesIO()
+                        img.save(buffer, format='JPEG', quality=85, optimize=True)
+                        buffer.seek(0)
+                        
+                        # Convert to base64
+                        image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+                        return f'data:image/jpeg;base64,{image_base64}'
+                    else:
+                        return None
+                except Exception:
+                    return None
             
-            # Generate faces using the same logic as our backend
-            for i in range(count):
-                # Get face from thispersondoesnotexist.com
-                response = requests.get(
-                    "https://thispersondoesnotexist.com", 
-                    headers={'User-Agent': 'FaceGrid 1.0'},
-                    timeout=10
-                )
+            # Use thread pool to fetch faces in parallel (max 5 concurrent)
+            faces = [None] * count
+            with concurrent.futures.ThreadPoolExecutor(max_workers=min(5, count)) as executor:
+                future_to_index = {executor.submit(fetch_and_process_face, i): i for i in range(count)}
                 
-                if response.status_code == 200:
-                    # Resize image to optimize file size and performance
-                    img = Image.open(io.BytesIO(response.content))
-                    
-                    # Resize to 256x256 for better performance (down from 1024x1024)
-                    img = img.resize((256, 256), Image.Resampling.LANCZOS)
-                    
-                    # Convert back to bytes with optimized quality
-                    buffer = io.BytesIO()
-                    img.save(buffer, format='JPEG', quality=85, optimize=True)
-                    buffer.seek(0)
-                    
-                    # Convert to base64
-                    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
-                    faces.append(f'data:image/jpeg;base64,{image_base64}')
-                else:
-                    faces.append(None)
+                for future in concurrent.futures.as_completed(future_to_index):
+                    index = future_to_index[future]
+                    try:
+                        faces[index] = future.result()
+                    except Exception:
+                        faces[index] = None
             
             # Return response
             self.send_response(200)
