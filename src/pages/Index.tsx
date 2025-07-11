@@ -11,6 +11,7 @@ import { generateFaceGrid, downloadGrid } from '@/utils/gridUtils';
 const gridSizes = [
   { label: '3x3 (9 faces)', value: '3x3', rows: 3, cols: 3 },
   { label: '4x4 (16 faces)', value: '4x4', rows: 4, cols: 4 },
+  { label: '6x4 (24 faces)', value: '6x4', rows: 4, cols: 6 },
   { label: '5x5 (25 faces)', value: '5x5', rows: 5, cols: 5 },
   { label: '6x6 (36 faces)', value: '6x6', rows: 6, cols: 6 },
   { label: '8x8 (64 faces)', value: '8x8', rows: 8, cols: 8 },
@@ -25,6 +26,7 @@ const Index = () => {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
+  const borderlessGridRef = useRef<HTMLDivElement>(null);
 
   const selectedGrid = gridSizes.find(size => size.value === selectedSize) || gridSizes[1];
   const totalFaces = selectedGrid.rows * selectedGrid.cols;
@@ -73,7 +75,13 @@ const Index = () => {
 
   const handleDownload = () => {
     if (gridRef.current) {
-      downloadGrid(gridRef.current, `peoplegrid-${selectedSize}-${Date.now()}.png`);
+      downloadGrid(gridRef.current, `peoplegrid-${selectedSize}-${Date.now()}.jpg`);
+    }
+  };
+
+  const handleDownloadNoBorders = () => {
+    if (borderlessGridRef.current) {
+      downloadGrid(borderlessGridRef.current, `peoplegrid-${selectedSize}-borderless-${Date.now()}.jpg`);
     }
   };
 
@@ -111,7 +119,7 @@ const Index = () => {
               <div className="flex flex-col gap-6 items-end">
                 <div className="w-full sm:flex-1">
                   <label className="block text-sm font-semibold text-gray-700 mb-3">
-                    Grid Size
+                    Grid Size (smaller = faster)
                   </label>
                   <Select value={selectedSize} onValueChange={setSelectedSize}>
                     <SelectTrigger className="w-full h-12 text-lg border-2 border-gray-200 hover:border-blue-300 transition-colors">
@@ -158,9 +166,9 @@ const Index = () => {
                 </div>
               )}
 
-              {/* Download Button */}
+              {/* Download Buttons */}
               {isComplete && faces.length > 0 && (
-                <div className="flex justify-center animate-fade-in">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
                   <Button
                     onClick={handleDownload}
                     variant="outline"
@@ -168,7 +176,16 @@ const Index = () => {
                     className="w-full sm:w-auto border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                   >
                     <Download className="w-5 h-5 mr-3" />
-                    Download High-Quality PNG
+                    Download High-Quality JPG
+                  </Button>
+                  <Button
+                    onClick={handleDownloadNoBorders}
+                    variant="outline"
+                    size="lg"
+                    className="w-full sm:w-auto border-2 border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                  >
+                    <Download className="w-5 h-5 mr-3" />
+                    Download Without Borders
                   </Button>
                 </div>
               )}
@@ -195,6 +212,30 @@ const Index = () => {
               />
             </CardContent>
           </Card>
+        )}
+
+        {/* Hidden Borderless Grid for Download */}
+        {isComplete && faces.length > 0 && (
+          <div className="fixed -left-[9999px] top-0 bg-white">
+            <div 
+              ref={borderlessGridRef}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: `repeat(${selectedGrid.cols}, 1fr)`,
+                gap: '0',
+                width: `${selectedGrid.cols * 256}px`,
+              }}
+            >
+              {faces.map((face, index) => (
+                <img
+                  key={index}
+                  src={face}
+                  alt=""
+                  style={{ width: '256px', height: '256px', display: 'block' }}
+                />
+              ))}
+            </div>
+          </div>
         )}
 
         {/* Footer */}

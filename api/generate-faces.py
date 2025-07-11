@@ -24,9 +24,8 @@ class Handler(BaseHTTPRequestHandler):
             # Generate faces sequentially with delay to avoid getting cached duplicates
             for i in range(count):
                 try:
-                    # Add delay between requests to ensure we get different faces
-                    if i > 0:
-                        time.sleep(0.5)  # Half second delay ensures cache miss
+                    # No delay needed - caching wasn't an issue before parallelization
+                    pass
                     
                     # Get face from thispersondoesnotexist.com
                     response = requests.get(
