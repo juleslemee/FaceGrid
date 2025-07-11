@@ -49,9 +49,9 @@ const Index = () => {
     // Start fake progress animation
     const progressInterval = setInterval(() => {
       setProgress(prev => {
-        if (prev >= 95) {
+        if (prev >= 99) {
           clearInterval(progressInterval);
-          return 95;
+          return 99;
         }
         return prev + 1;
       });
@@ -126,7 +126,13 @@ const Index = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Grid Size (smaller = faster)
                   </label>
-                  <Select value={selectedSize} onValueChange={setSelectedSize}>
+                  <Select value={selectedSize} onValueChange={(value) => {
+                    setSelectedSize(value);
+                    // Clear the grid when changing size
+                    setFaces([]);
+                    setIsComplete(false);
+                    setProgress(0);
+                  }}>
                     <SelectTrigger className="w-full h-12 text-lg border-2 border-gray-200 hover:border-blue-300 transition-colors">
                       <SelectValue placeholder="Select grid size" />
                     </SelectTrigger>
