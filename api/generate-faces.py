@@ -19,15 +19,23 @@ class Handler(BaseHTTPRequestHandler):
             count = int(params.get('count', ['1'])[0])
             count = min(count, 150)  # Limit to 150 faces max
             
-            def fetch_and_process_face(index):
+            faces = []
+            
+            # Generate faces sequentially with delay to avoid getting cached duplicates
+            for i in range(count):
                 try:
-                    # Add small delay to avoid rate limiting
-                    time.sleep(index * 0.1)
+                    # Add delay between requests to ensure we get different faces
+                    if i > 0:
+                        time.sleep(0.5)  # Half second delay ensures cache miss
                     
                     # Get face from thispersondoesnotexist.com
                     response = requests.get(
                         "https://thispersondoesnotexist.com", 
-                        headers={'User-Agent': 'FaceGrid 1.0'},
+                        headers={
+                            'User-Agent': 'FaceGrid 1.0',
+                            'Cache-Control': 'no-cache',
+                            'Pragma': 'no-cache'
+                        },
                         timeout=10
                     )
                     
@@ -45,23 +53,11 @@ class Handler(BaseHTTPRequestHandler):
                         
                         # Convert to base64
                         image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
-                        return f'data:image/jpeg;base64,{image_base64}'
+                        faces.append(f'data:image/jpeg;base64,{image_base64}')
                     else:
-                        return None
+                        faces.append(None)
                 except Exception:
-                    return None
-            
-            # Use thread pool to fetch faces in parallel (max 5 concurrent)
-            faces = [None] * count
-            with concurrent.futures.ThreadPoolExecutor(max_workers=min(5, count)) as executor:
-                future_to_index = {executor.submit(fetch_and_process_face, i): i for i in range(count)}
-                
-                for future in concurrent.futures.as_completed(future_to_index):
-                    index = future_to_index[future]
-                    try:
-                        faces[index] = future.result()
-                    except Exception:
-                        faces[index] = None
+                    faces.append(None)
             
             # Return response
             self.send_response(200)
