@@ -21,11 +21,20 @@ Generate professional grids of AI-generated faces perfect for mockups, presentat
 
 ## Integrations (Coming Soon)
 
-### Canva Plugin *(Pending Approval)*
-<img src="public/CanvaPlugin.png" alt="FaceGrid Canva Plugin" width="400">
-
-### Figma Plugin *(Pending Approval)*
-<img src="public/FigmaPlugin.png" alt="FaceGrid Figma Plugin" width="400">
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <h3>Canva Plugin <em>(Pending Approval)</em></h3>
+        <img src="public/CanvaPlugin.png" alt="FaceGrid Canva Plugin" width="400">
+      </td>
+      <td align="center">
+        <h3>Figma Plugin <em>(Pending Approval)</em></h3>
+        <img src="public/FigmaPlugin.png" alt="FaceGrid Figma Plugin" width="400">
+      </td>
+    </tr>
+  </table>
+</div>
 
 ## Quick Start
 
