@@ -4,7 +4,7 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Progress } from '@/components/ui/progress';
-import { Download, Users, Sparkles } from 'lucide-react';
+import { Download, Users, Sparkles, Github } from 'lucide-react';
 import FaceGrid from '@/components/FaceGrid';
 import SEOContent from '@/components/SEOContent';
 import { generateFaceGrid, downloadGrid } from '@/utils/gridUtils';
@@ -255,15 +255,26 @@ const Index = () => {
 
         {/* Footer */}
         <div className="text-center mt-16 text-gray-500">
-          <div className="flex items-center justify-center gap-2 mb-2">
+          <div className="flex items-center justify-center gap-2 mb-4">
             <Sparkles className="w-4 h-4" />
             <p className="text-sm font-medium">
             All faces are artificially generated and do not represent real people
             </p>
             <Sparkles className="w-4 h-4" />
           </div>
+          <div className="flex items-center justify-center gap-4 mb-2">
+            <a 
+              href="https://github.com/juleslemee/FaceGrid" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              <Github className="w-4 h-4" />
+              <span className="text-sm">Open Source</span>
+            </a>
+          </div>
           <p className="text-xs">
-            Made with 💙 by Jules Lemée
+            Made with 💙 by <a href="https://juleslemee.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Jules Lemée</a>
           </p>
         </div>
       </div>

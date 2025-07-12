@@ -4,23 +4,17 @@ import { Users, Download, Zap, Shield, Globe, Palette } from 'lucide-react';
 
 const SEOContent = () => {
   return (
-    <div className="max-w-6xl mx-auto mt-20 space-y-16 px-4">
+    <div className="max-w-6xl mx-auto mt-32 space-y-16 px-4">
       {/* What is FaceGrid Section */}
       <section className="text-center">
         <h2 className="text-4xl font-bold text-gray-900 mb-6">
-          What is FaceGrid? The Ultimate AI Face Grid Generator
+          What is FaceGrid?
         </h2>
-        <div className="max-w-4xl mx-auto text-lg text-gray-600 leading-relaxed space-y-4">
+        <div className="max-w-4xl mx-auto text-lg text-gray-600 leading-relaxed">
           <p>
-            FaceGrid is a powerful <strong>AI face grid generator</strong> that creates professional grids of 
-            artificial faces perfect for <strong>mockups, presentations, and design projects</strong>. Our free 
-            <strong>fake people generator</strong> uses advanced AI technology to produce high-quality, 
-            copyright-free faces that look completely realistic.
-          </p>
-          <p>
-            Whether you're a designer creating mockups, a developer building applications, or a marketer 
-            preparing presentations, FaceGrid provides the perfect solution for generating 
-            <strong>AI faces for mockups</strong> without any legal concerns or registration requirements.
+            FaceGrid generates grids of AI faces for your design projects. Create realistic person grids 
+            for mockups, presentations, and prototypes without worrying about copyright or privacy issues. 
+            All faces are AI-generated, so they don't represent real people.
           </p>
         </div>
       </section>
@@ -28,7 +22,7 @@ const SEOContent = () => {
       {/* Use Cases Section */}
       <section>
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-          Perfect Use Cases for AI Face Grids
+          Use Cases
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <Card className="border-2 hover:shadow-lg transition-shadow">
@@ -66,80 +60,10 @@ const SEOContent = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section>
-        <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-          Why Choose FaceGrid for AI Face Generation?
-        </h2>
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <Zap className="w-6 h-6 text-yellow-500 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="text-xl font-semibold mb-2">Multiple Grid Sizes</h3>
-                <p className="text-gray-600">
-                  Generate grids from 3x3 (9 faces) up to 10x15 (150 faces). Choose the perfect 
-                  size for your project needs, whether it's a small mockup or a large-scale presentation.
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4">
-              <Download className="w-6 h-6 text-blue-500 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="text-xl font-semibold mb-2">Instant Download Options</h3>
-                <p className="text-gray-600">
-                  Download your AI face grids with borders for structured layouts, or choose 
-                  borderless options for seamless integration into your designs. Both formats 
-                  are optimized for professional use.
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4">
-              <Shield className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="text-xl font-semibold mb-2">High-Quality AI Technology</h3>
-                <p className="text-gray-600">
-                  Our advanced AI generates photorealistic faces with diverse ethnicities, 
-                  ages, and appearances. Each face is unique and created specifically for your grid.
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Perfect for Professionals</h3>
-            <ul className="space-y-3 text-gray-700">
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                UI/UX Designers
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                Web Developers
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                Marketing Teams
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                Content Creators
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                Product Managers
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
       {/* Benefits Section */}
       <section className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl p-12">
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-          Benefits of Using AI-Generated Faces
+          Why Use FaceGrid?
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="text-center">
@@ -148,8 +72,7 @@ const SEOContent = () => {
             </div>
             <h3 className="text-lg font-semibold mb-2">Copyright-Free</h3>
             <p className="text-gray-600 text-sm">
-              All generated faces are completely copyright-free. Use them in any project without 
-              legal concerns or attribution requirements.
+              Use in any project without legal concerns. All faces are AI-generated.
             </p>
           </div>
           
@@ -159,8 +82,7 @@ const SEOContent = () => {
             </div>
             <h3 className="text-lg font-semibold mb-2">No Registration</h3>
             <p className="text-gray-600 text-sm">
-              Start generating face grids immediately. No sign-up, no account creation, 
-              no personal information required.
+              Start generating immediately. No sign-up required.
             </p>
           </div>
           
@@ -170,8 +92,7 @@ const SEOContent = () => {
             </div>
             <h3 className="text-lg font-semibold mb-2">Privacy Safe</h3>
             <p className="text-gray-600 text-sm">
-              These faces don't represent real people, ensuring complete privacy protection 
-              for your projects and presentations.
+              Faces don't represent real people, ensuring complete privacy protection.
             </p>
           </div>
           
@@ -179,14 +100,14 @@ const SEOContent = () => {
             <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Download className="w-8 h-8 text-yellow-600" />
             </div>
-            <h3 className="text-lg font-semibold mb-2">Instant Results</h3>
+            <h3 className="text-lg font-semibold mb-2">Multiple Formats</h3>
             <p className="text-gray-600 text-sm">
-              Generate and download professional face grids in seconds. Perfect for tight 
-              deadlines and quick prototyping.
+              Download with borders for structure or borderless for clean integration.
             </p>
           </div>
         </div>
       </section>
+
 
       {/* FAQ Section */}
       <section>
@@ -259,14 +180,14 @@ const SEOContent = () => {
           Ready to Create Your AI Face Grid?
         </h2>
         <p className="text-xl mb-8 opacity-90">
-          Join thousands of designers and developers who trust FaceGrid for their projects
+          Generate professional AI face grids for your next project
         </p>
-        <a 
-          href="#top" 
-          className="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors"
+        <button 
+          onClick={() => document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' })}
+          className="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors cursor-pointer"
         >
           Start Generating Now - It's Free!
-        </a>
+        </button>
       </section>
     </div>
   );
