@@ -11,12 +11,12 @@ import { generateFaceGrid, downloadGrid } from '@/utils/gridUtils';
 const gridSizes = [
   { label: '3x3 (9 faces)', value: '3x3', rows: 3, cols: 3 },
   { label: '4x4 (16 faces)', value: '4x4', rows: 4, cols: 4 },
-  { label: '6x4 (24 faces)', value: '6x4', rows: 4, cols: 6 },
+  { label: '4x6 (24 faces)', value: '4x6', rows: 4, cols: 6 },
   { label: '5x5 (25 faces)', value: '5x5', rows: 5, cols: 5 },
   { label: '6x6 (36 faces)', value: '6x6', rows: 6, cols: 6 },
   { label: '8x8 (64 faces)', value: '8x8', rows: 8, cols: 8 },
   { label: '10x10 (100 faces)', value: '10x10', rows: 10, cols: 10 },
-  { label: '15x10 (150 faces)', value: '15x10', rows: 10, cols: 15 },
+  { label: '10x15 (150 faces)', value: '10x15', rows: 10, cols: 15 },
 ];
 
 const Index = () => {
