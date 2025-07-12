@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Progress } from '@/components/ui/progress';
 import { Download, Users, Sparkles } from 'lucide-react';
 import FaceGrid from '@/components/FaceGrid';
+import SEOContent from '@/components/SEOContent';
 import { generateFaceGrid, downloadGrid } from '@/utils/gridUtils';
 
 const gridSizes = [
@@ -91,7 +92,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-4">
+    <div id="top" className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -248,6 +249,9 @@ const Index = () => {
             </div>
           </div>
         )}
+
+        {/* SEO Content Section */}
+        <SEOContent />
 
         {/* Footer */}
         <div className="text-center mt-16 text-gray-500">
