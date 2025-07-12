@@ -61,6 +61,7 @@ npm run dev
 - **Frontend:** React, TypeScript, Tailwind CSS, shadcn/ui
 - **Backend:** Python, Vercel Functions
 - **Tools:** Vite, Lucide Icons
+- **AI Generation:** Powered by thispersondoesnotexist.com
 
 ## Contributing
 
