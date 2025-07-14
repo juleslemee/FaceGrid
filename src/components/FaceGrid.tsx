@@ -17,19 +17,18 @@ const FaceGrid = forwardRef<HTMLDivElement, FaceGridProps>(
     return (
       <div 
         ref={ref}
-        className="w-full max-w-5xl mx-auto"
+        className="w-full max-w-7xl mx-auto px-2 sm:px-4"
         style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(${cols}, 1fr)`,
-          gap: '6px',
-          aspectRatio: `${cols}/${rows}`,
+          gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+          gap: '2px sm:gap-4 md:gap-6',
         }}
       >
         {/* Render loaded faces */}
         {faces.map((face, index) => (
           <div
             key={index}
-            className="aspect-square overflow-hidden rounded-lg bg-gray-100 relative group shadow-sm hover:shadow-lg transition-all duration-300"
+            className="aspect-square overflow-hidden rounded sm:rounded-md md:rounded-lg bg-gray-100 relative group shadow-sm hover:shadow-lg transition-all duration-300"
           >
             <img
               src={face}
@@ -44,7 +43,7 @@ const FaceGrid = forwardRef<HTMLDivElement, FaceGridProps>(
         {/* Render placeholder skeletons for remaining cells */}
         {isGenerating && Array.from({ length: emptyCells }).map((_, index) => (
           <div key={`skeleton-${index}`} className="aspect-square">
-            <Skeleton className="w-full h-full rounded-lg animate-pulse" />
+            <Skeleton className="w-full h-full rounded sm:rounded-md md:rounded-lg animate-pulse" />
           </div>
         ))}
       </div>

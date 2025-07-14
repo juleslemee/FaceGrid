@@ -3,11 +3,14 @@
 
 export const generateFaceGrid = async (
   totalFaces: number,
-  onProgress: (loadedCount: number) => void
+  onProgress: (loadedCount: number) => void,
+  abortSignal?: AbortSignal
 ): Promise<string[]> => {
   try {
     // Call our API to generate faces
-    const response = await fetch(`/api/generate-faces?count=${totalFaces}`);
+    const response = await fetch(`/api/generate-faces?count=${totalFaces}`, {
+      signal: abortSignal
+    });
     
     if (!response.ok) {
       throw new Error(`API error! status: ${response.status}`);

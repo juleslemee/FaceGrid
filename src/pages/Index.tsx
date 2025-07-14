@@ -28,11 +28,20 @@ const Index = () => {
   const [isComplete, setIsComplete] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
   const borderlessGridRef = useRef<HTMLDivElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const selectedGrid = gridSizes.find(size => size.value === selectedSize) || gridSizes[1];
   const totalFaces = selectedGrid.rows * selectedGrid.cols;
 
   const handleGenerate = async () => {
+    // Cancel any ongoing generation
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    
+    // Create new AbortController for this generation
+    abortControllerRef.current = new AbortController();
+    
     // Clear everything first to avoid showing old grid
     setIsComplete(false);
     setFaces([]);
@@ -65,15 +74,18 @@ const Index = () => {
           // This will jump to 100% when done
           clearInterval(progressInterval);
           setProgress(100);
-        }
+        },
+        abortControllerRef.current.signal
       );
       
       setFaces(generatedFaces);
       setIsComplete(true);
     } catch (error) {
-      console.error('Failed to generate faces:', error);
       clearInterval(progressInterval);
-      setProgress(0);
+      if (error instanceof Error && error.name !== 'AbortError') {
+        console.error('Failed to generate faces:', error);
+        setProgress(0);
+      }
     } finally {
       setIsGenerating(false);
     }
@@ -128,11 +140,17 @@ const Index = () => {
                     Grid Size (smaller = faster)
                   </label>
                   <Select value={selectedSize} onValueChange={(value) => {
+                    // Cancel any ongoing generation
+                    if (abortControllerRef.current) {
+                      abortControllerRef.current.abort();
+                    }
+                    
                     setSelectedSize(value);
                     // Clear the grid when changing size
                     setFaces([]);
                     setIsComplete(false);
                     setProgress(0);
+                    setIsGenerating(false);
                   }}>
                     <SelectTrigger className="w-full h-12 text-lg border-2 border-gray-200 hover:border-blue-300 transition-colors">
                       <SelectValue placeholder="Select grid size" />
